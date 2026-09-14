@@ -23,3 +23,9 @@ Construir una página principal responsive, editorial y cálida para descubrir y
 - Estado local para búsqueda, filtros, orden, favoritos, carrito y menú móvil.
 - Metadatos sociales y SEO propios de BEKOKO.
 - Validación visual en escritorio y móvil, además de revisión de errores del proyecto.
+
+## Ampliación confirmada
+- Modal de detalle para cada producto.
+- Sección de beneficios.
+- Formulario visual de newsletter.
+- Footer completo.
