@@ -2,14 +2,23 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ArrowDown, ArrowRight, Heart, Menu, Search, ShoppingBag, Sparkles, Truck, ShieldCheck, Leaf, X, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/bekoko-hero.jpg";
-import editorialImage from "@/assets/bekoko-editorial.jpg";
-import candlesImage from "@/assets/category-candles.jpg";
-import diffusersImage from "@/assets/category-diffusers.jpg";
-import spraysImage from "@/assets/category-sprays.jpg";
-import oilsImage from "@/assets/category-oils.jpg";
-import soapsImage from "@/assets/category-soaps.jpg";
-import giftsImage from "@/assets/category-gifts.jpg";
+import heroAsset from "@/assets/bekoko-hero.jpg.asset.json";
+import editorialAsset from "@/assets/bekoko-editorial.jpg.asset.json";
+import candlesAsset from "@/assets/category-candles.jpg.asset.json";
+import diffusersAsset from "@/assets/category-diffusers.jpg.asset.json";
+import spraysAsset from "@/assets/category-sprays.jpg.asset.json";
+import oilsAsset from "@/assets/category-oils.jpg.asset.json";
+import soapsAsset from "@/assets/category-soaps.jpg.asset.json";
+import giftsAsset from "@/assets/category-gifts.jpg.asset.json";
+
+const heroImage = heroAsset.url;
+const editorialImage = editorialAsset.url;
+const candlesImage = candlesAsset.url;
+const diffusersImage = diffusersAsset.url;
+const spraysImage = spraysAsset.url;
+const oilsImage = oilsAsset.url;
+const soapsImage = soapsAsset.url;
+const giftsImage = giftsAsset.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
