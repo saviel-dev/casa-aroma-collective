@@ -1,4 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/images/logo.png";
 import { Heart, Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
@@ -6,36 +8,58 @@ import { Button } from "@/components/ui/button";
 const nav = [
   { label: "Inicio", to: "/" as const },
   { label: "Catálogo", to: "/catalogo" as const },
-  { label: "Aromas", to: "/aromas" as const },
-  { label: "Nosotros", to: "/nosotros" as const },
   { label: "Contacto", to: "/contacto" as const },
 ];
 
 export function SiteShell({ children, cartCount = 0, favoriteCount = 0 }: { children: ReactNode; cartCount?: number; favoriteCount?: number }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
   return <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
-      <div className="mx-auto grid h-18 max-w-7xl grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-4 sm:px-6 lg:px-8">
-        <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menú" onClick={() => setMenuOpen(true)}><Menu /></Button>
-        <Link to="/" className="justify-self-center text-xl font-black uppercase tracking-[0.18em] md:justify-self-start">BEKO<span className="text-cyan">KO</span></Link>
-        <nav className="hidden items-center justify-center gap-7 md:flex" aria-label="Navegación principal">
-          {nav.map((item) => <Link key={item.to} to={item.to} activeOptions={{ exact: item.to === "/" }} className="nav-link text-[11px] font-bold uppercase" activeProps={{ className: "text-magenta" }}>{item.label}</Link>)}
-        </nav>
-        <div className="flex items-center justify-end gap-0.5">
-          <Button variant="ghost" size="icon" asChild aria-label="Buscar"><Link to="/catalogo"><Search /></Link></Button>
-          <Button variant="ghost" size="icon" aria-label={`${favoriteCount} favoritos`} className="hidden sm:inline-flex"><Heart className={favoriteCount ? "fill-magenta text-magenta" : ""} /></Button>
-          <Button variant="ghost" size="icon" aria-label={`${cartCount} productos en el carrito`} className="relative"><ShoppingBag /><span className="absolute right-0 top-0 grid h-4 min-w-4 place-items-center rounded-full bg-magenta px-1 text-[9px] text-on-color">{cartCount}</span></Button>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menú" onClick={() => setMenuOpen(true)}><Menu /></Button>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="BEKOKO" className="h-10 w-auto object-contain" />
+            <span className="font-black text-xl tracking-wide uppercase text-foreground leading-none mt-0.5">TODO EN AROMAS</span>
+          </Link>
+        </div>
+        <div className="flex items-center gap-8">
+          <nav className="hidden items-center gap-6 md:flex" aria-label="Navegación principal">
+            {nav.map((item) => <Link key={item.to} to={item.to} activeOptions={{ exact: item.to === "/" }} className="text-sm font-semibold transition-colors hover:text-cyan" activeProps={{ className: "border-b-2 border-cyan pb-1" }}>{item.label}</Link>)}
+          </nav>
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon" aria-label={`${cartCount} productos en el carrito`} className="relative rounded-full"><ShoppingBag className="h-5 w-5" /><span className="absolute right-0 top-0 grid h-4 min-w-4 place-items-center rounded-full bg-cyan px-1 text-[9px] text-white">{cartCount}</span></Button>
+          </div>
         </div>
       </div>
     </header>
     {menuOpen && <div className="fixed inset-0 z-[60] bg-foreground/30 md:hidden" onClick={() => setMenuOpen(false)}>
       <aside className="h-full w-[84%] max-w-sm bg-background p-6 shadow-2xl" onClick={(event) => event.stopPropagation()}>
-        <div className="flex items-center justify-between border-b border-border pb-6"><span className="text-xl font-black uppercase">BEKO<span className="text-cyan">KO</span></span><Button variant="ghost" size="icon" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú"><X /></Button></div>
+        <div className="flex items-center justify-between border-b border-border pb-6"><div className="flex items-center gap-2.5"><img src={logo} alt="BEKOKO" className="h-9 w-auto object-contain" /><span className="font-black text-lg tracking-wide uppercase text-foreground leading-none mt-0.5">TODO EN AROMAS</span></div><Button variant="ghost" size="icon" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú"><X /></Button></div>
         <nav className="flex flex-col py-7">{nav.map((item, index) => <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)} className="grid grid-cols-[auto_1fr] items-center gap-4 border-b border-border py-5"><span className="text-xs font-bold text-magenta">0{index + 1}</span><span className="font-display text-3xl">{item.label}</span></Link>)}</nav>
       </aside>
     </div>}
-    <main className="pt-18">{children}</main>
+    <main className="pt-20">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    </main>
     <footer className="bg-foreground text-on-color"><div className="mx-auto max-w-7xl px-5 py-14 sm:px-8"><div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4"><div><p className="text-3xl font-black tracking-[0.14em]">BEKO<span className="text-cyan">KO</span></p><p className="mt-4 max-w-xs text-sm leading-6 opacity-65">Aromas para habitar con intención, calma y belleza.</p></div><FooterGroup title="Explorar" links={["Catálogo", "Aromas", "Novedades"]}/><FooterGroup title="BEKOKO" links={["Nosotros", "Materiales", "Cuidados"]}/><FooterGroup title="Contacto" links={["hola@bekoko.cl", "Santiago, Chile", "Instagram"]}/></div><div className="mt-14 flex flex-col gap-3 border-t border-on-color/20 pt-6 text-xs opacity-55 sm:flex-row sm:justify-between"><span>© 2026 BEKOKO</span><span>Privacidad · Términos</span></div></div></footer>
+    
+    <a href="https://wa.me/56912345678" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110" aria-label="Contactar por WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+      </svg>
+    </a>
   </div>;
 }
 

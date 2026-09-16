@@ -20,19 +20,19 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return <SiteShell>
-    <section className="mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-12 lg:py-20">
+    <section className="mx-auto grid max-w-7xl items-center gap-6 px-5 py-6 sm:px-8 lg:grid-cols-12 lg:py-10">
       <div className="animate-rise lg:col-span-5">
-        <div className="flex items-center gap-3"><span className="h-1.5 w-12 bg-magenta"/><p className="text-xs font-bold uppercase text-magenta">Aromas para habitar</p></div>
-        <h1 className="mt-7 text-7xl font-black uppercase leading-[0.83] sm:text-8xl lg:text-9xl">BEKO<br/><span className="text-cyan">KO</span></h1>
-        <div className="mt-8 border-l-4 border-sun pl-6"><p className="font-display text-3xl italic leading-tight sm:text-4xl">El aroma también es parte de tu hogar.</p></div>
-        <p className="mt-6 max-w-md text-base leading-7 text-muted-foreground">Fragancias contemporáneas que acompañan tus rituales y convierten cada espacio en un lugar profundamente personal.</p>
-        <div className="mt-8 flex flex-wrap items-center gap-5"><Button size="lg" asChild><Link to="/catalogo">Explorar catálogo <ArrowRight/></Link></Button><Link to="/aromas" className="border-b-2 border-cyan pb-1 text-xs font-bold uppercase">Descubrir aromas</Link></div>
+        <div className="flex items-center gap-2"><span className="h-1 w-10 bg-magenta"/><p className="text-[10px] font-bold uppercase text-magenta">Aromas para habitar</p></div>
+        <h1 className="mt-4 flex flex-wrap items-baseline gap-4 text-5xl font-black uppercase leading-[0.83] sm:text-6xl lg:text-7xl"><span>TPH</span><span className="font-display italic text-4xl sm:text-5xl lg:text-6xl text-cyan tracking-normal lowercase">Aromas</span></h1>
+        <div className="mt-5 border-l-4 border-sun pl-4"><p className="font-display text-xl italic leading-tight sm:text-2xl">El aroma también es parte de tu hogar.</p></div>
+        <p className="mt-4 max-w-md text-xs leading-5 text-muted-foreground">Fragancias contemporáneas que acompañan tus rituales y convierten cada espacio en un lugar profundamente personal.</p>
+        <div className="mt-5 flex flex-wrap items-center gap-4"><Button size="sm" asChild><Link to="/catalogo">Explorar catálogo <ArrowRight className="ml-1 h-3 w-3"/></Link></Button><Link to="/aromas" className="border-b-2 border-cyan pb-0.5 text-[10px] font-bold uppercase">Descubrir aromas</Link></div>
       </div>
-      <div className="relative grid grid-cols-2 gap-4 lg:col-span-7 lg:gap-6">
-        <div className="absolute -left-3 -top-3 h-[65%] w-[calc(100%+12px)] border-2 border-cyan"/>
-        <div className="group relative col-span-2 aspect-[16/10] overflow-hidden bg-muted shadow-xl"><img src={heroAsset.url} alt="Vela y difusor BEKOKO en un hogar luminoso" width={1600} height={1008} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/><div className="absolute bottom-0 left-0 bg-background/92 px-5 py-4 backdrop-blur"><p className="text-[10px] font-black uppercase text-magenta">Colección destacada</p><p className="mt-1 text-sm font-bold uppercase">Rituales de casa</p></div></div>
-        <Link to="/aromas" className="group relative aspect-square overflow-hidden bg-sun p-6 text-ink sm:p-8"><span className="absolute left-6 top-5 text-5xl font-black opacity-10">01</span><div className="flex h-full flex-col justify-end"><Sparkles/><h2 className="mt-4 text-2xl font-black uppercase leading-none sm:text-4xl">Mapa de<br/>aromas</h2><span className="mt-4 h-1 w-0 bg-ink transition-all duration-500 group-hover:w-full"/></div></Link>
-        <Link to="/nosotros" className="group relative aspect-square overflow-hidden bg-foreground"><img src={editorialAsset.url} alt="Botánicos y vela artesanal BEKOKO" width={912} height={1200} className="h-full w-full object-cover opacity-65 transition-transform duration-700 group-hover:scale-105"/><span className="absolute inset-5 grid place-items-center border-2 border-on-color/70 text-xs font-black uppercase text-on-color">Nuestra esencia</span></Link>
+      <div className="relative grid grid-cols-2 gap-2 lg:col-span-7 lg:gap-4">
+        <div className="absolute -left-2 -top-2 h-[65%] w-[calc(100%+8px)] border-2 border-cyan"/>
+        <div className="group relative col-span-2 aspect-[3/1] overflow-hidden bg-muted shadow-xl"><img src={heroAsset.url} alt="Vela y difusor BEKOKO en un hogar luminoso" width={1600} height={1008} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]"/><div className="absolute bottom-0 left-0 bg-background/92 px-3 py-2 backdrop-blur"><p className="text-[8px] font-black uppercase text-magenta">Colección destacada</p><p className="mt-0.5 text-[10px] font-bold uppercase">Rituales de casa</p></div></div>
+        <Link to="/aromas" className="group relative aspect-[4/3] overflow-hidden bg-sun p-4 text-ink sm:p-5"><span className="absolute left-4 top-3 text-3xl font-black opacity-10">01</span><div className="flex h-full flex-col justify-end"><Sparkles className="h-4 w-4"/><h2 className="mt-2 text-lg font-black uppercase leading-none sm:text-xl">Mapa de<br/>aromas</h2><span className="mt-2 h-0.5 w-0 bg-ink transition-all duration-500 group-hover:w-full"/></div></Link>
+        <Link to="/nosotros" className="group relative aspect-[4/3] overflow-hidden bg-foreground"><img src={editorialAsset.url} alt="Botánicos y vela artesanal BEKOKO" width={912} height={1200} className="h-full w-full object-cover opacity-65 transition-transform duration-700 group-hover:scale-105"/><span className="absolute inset-3 grid place-items-center border border-on-color/70 text-[9px] font-black uppercase text-on-color">Nuestra esencia</span></Link>
       </div>
     </section>
 
